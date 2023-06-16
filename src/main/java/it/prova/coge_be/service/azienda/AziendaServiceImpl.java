@@ -3,10 +3,13 @@ package it.prova.coge_be.service.azienda;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import it.prova.coge_be.model.Azienda;
 import it.prova.coge_be.repository.azienda.AziendaRepository;
 
+
+@Service
 public class AziendaServiceImpl implements AziendaService{
 	
 	@Autowired

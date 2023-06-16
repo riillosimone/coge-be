@@ -38,7 +38,7 @@ public class AziendaDTO {
 	
 	
 	public Azienda buildAziendaModel() {
-		return Azienda.builder().id(this.id).ragioneSociale(this.ragioneSociale).partivaIva(this.partitaIva).indirizzo(this.indirizzo).build();
+		return Azienda.builder().id(this.id).ragioneSociale(this.ragioneSociale).partivaIva(this.partitaIva).indirizzo(this.indirizzo).commesse(CommessaDTO.createCommessaSetFromDTOList(this.commesse)).build();
 	}
 	
 	
@@ -56,10 +56,17 @@ public class AziendaDTO {
 		}).collect(Collectors.toList());
 	}
 	
-	public static Set<Commessa> createCommessaSetFromDTOList(List<CommessaDTO> modelListInput) {
-		return modelListInput.stream().map(commessaItem -> {
-		return commessaItem.buildCommessaModel();
+	public static Set<Azienda> createAziendaSetFromDTOList(List<AziendaDTO> modelListInput) {
+		return modelListInput.stream().map(aziendaItem -> {
+		return aziendaItem.buildAziendaModel();
 		}).collect(Collectors.toSet());
+		}
+	
+	
+	public static List<AziendaDTO> createAziendaListFromModelSet(Set<Azienda> modelSetInput) {
+		return modelSetInput.stream().map(aziendaItem -> {
+		return AziendaDTO.buildAziendaDTOFromModel(aziendaItem);
+		}).collect(Collectors.toList());
 		}
 	
 	
