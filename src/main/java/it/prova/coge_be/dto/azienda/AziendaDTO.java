@@ -1,5 +1,6 @@
 package it.prova.coge_be.dto.azienda;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
 
+import it.prova.coge_be.dto.commessa.CommessaDTO;
 import it.prova.coge_be.model.Azienda;
 import it.prova.coge_be.model.Commessa;
 import lombok.AllArgsConstructor;
@@ -30,6 +32,9 @@ public class AziendaDTO {
 	@NotBlank(message = "{indirizzo.notblank}")
 	private String indirizzo;
 	
+	private List<CommessaDTO> commesse = new ArrayList<>();
+
+	
 	
 	
 	public Azienda buildAziendaModel() {
@@ -50,6 +55,12 @@ public class AziendaDTO {
 			return result;
 		}).collect(Collectors.toList());
 	}
+	
+	public static Set<AziendaDTO> createAziendaDTOSetFromModelSet(Set<Azienda> modelListInput) {
+		return modelListInput.stream().map(aziendaItem -> {
+		return AziendaDTO.buildAziendaDTOFromModel(aziendaItem);
+		}).collect(Collectors.toSet());
+		}
 	
 	
 	
