@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -28,17 +27,16 @@ import lombok.NoArgsConstructor;
 public class RapportinoDTO {
 	
 	@NotNull(message = "{id.notnull}")
-	@Min(0)
 	private Long id;
 	
 	@NotNull(message = "{numeroGiorni.notnull}")
 	@Min(0)
 	private Integer numeroGiorni;
 	
-	@Valid
+	
 	private CommessaDTO commessa;
 	
-	@Valid
+	
 	private RisorsaDTO risorsa;
 	
 	public Rapportino buildRapportinoModel() {

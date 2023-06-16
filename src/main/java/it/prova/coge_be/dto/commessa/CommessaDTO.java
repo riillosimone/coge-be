@@ -28,7 +28,6 @@ import lombok.NoArgsConstructor;
 public class CommessaDTO {
 
 	@NotNull(message = "{id.notnull}")
-	@Min(0)
 	private Long id;
 
 	@NotBlank(message = "{descrizione.notblank}")
