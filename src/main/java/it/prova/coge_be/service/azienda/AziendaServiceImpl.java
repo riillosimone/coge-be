@@ -14,7 +14,7 @@ import it.prova.coge_be.repository.azienda.AziendaRepository;
 public class AziendaServiceImpl implements AziendaService {
 
 	@Autowired
-	AziendaRepository repository;
+	private AziendaRepository repository;
 
 	@Override
 	public List<Azienda> listAll() {
