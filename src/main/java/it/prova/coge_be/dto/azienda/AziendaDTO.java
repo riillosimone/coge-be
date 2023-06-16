@@ -56,9 +56,9 @@ public class AziendaDTO {
 		}).collect(Collectors.toList());
 	}
 	
-	public static Set<AziendaDTO> createAziendaDTOSetFromModelSet(Set<Azienda> modelListInput) {
-		return modelListInput.stream().map(aziendaItem -> {
-		return AziendaDTO.buildAziendaDTOFromModel(aziendaItem);
+	public static Set<Commessa> createCommessaSetFromDTOList(List<CommessaDTO> modelListInput) {
+		return modelListInput.stream().map(commessaItem -> {
+		return commessaItem.buildCommessaModel();
 		}).collect(Collectors.toSet());
 		}
 	
