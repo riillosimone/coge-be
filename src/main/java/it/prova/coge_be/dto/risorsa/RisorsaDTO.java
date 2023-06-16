@@ -2,11 +2,13 @@ package it.prova.coge_be.dto.risorsa;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
 
 import it.prova.coge_be.dto.attachment.AttachmentDTO;
+import it.prova.coge_be.dto.commessa.CommessaDTO;
 import it.prova.coge_be.model.Risorsa;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +41,8 @@ public class RisorsaDTO {
 	private Integer costoGiornaliero;
 
 	private AttachmentDTO cv;
+	
+	private List<CommessaDTO> commesse;
 
 	public Risorsa buildModelFromDTO() {
 		return Risorsa.builder().id(this.id).nome(this.nome).cognome(this.cognome).dataIn(this.dataIn)
@@ -59,6 +63,12 @@ public class RisorsaDTO {
 		return modelListInput.stream().map(risorsaItem -> {
 			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem);
 		}).collect(Collectors.toList());
+	}
+	
+	public static Set<RisorsaDTO> createRisorsaDTOSetFromModelSet(Set<Risorsa> modelListInput) {
+		return modelListInput.stream().map(risorsaItem -> {
+			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem);
+		}).collect(Collectors.toSet());
 	}
 
 }
