@@ -1,6 +1,7 @@
 package it.prova.coge_be.dto.risorsa;
 
 import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -47,7 +48,7 @@ public class RisorsaDTO {
 	public Risorsa buildModelFromDTO() {
 		return Risorsa.builder().id(this.id).nome(this.nome).cognome(this.cognome).dataIn(this.dataIn)
 				.dataOut(this.dataOut).cf(this.cf).email(this.email).costoGiornaliero(this.costoGiornaliero)
-				.cv(this.cv.buildModelFromDTO()).commesse(CommessaDTO.createCommessaDTOListFromModelList(this.commesse)).build();
+				.cv(this.cv.buildModelFromDTO()).commesse(CommessaDTO.createCommessaSetFromDTOList(this.commesse)).build();
 	}
 
 	public static RisorsaDTO buildRisorsaDTOFromModel(Risorsa risorsaModel) {

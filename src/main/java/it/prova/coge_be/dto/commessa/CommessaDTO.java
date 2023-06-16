@@ -45,21 +45,15 @@ public class CommessaDTO {
 	@NotNull(message = "{importo.notnull}")
 	@Min(0)
 	private Double importo;
-	
-	
-	private AziendaDTO azienda;
-	
-	private List<RisorsaDTO> risorse;
-	
-	
-	
-	
 
-	
+	private AziendaDTO azienda;
+
+	private List<RisorsaDTO> risorse;
 
 	public Commessa buildCommessaModel() {
 		Commessa result = Commessa.builder().id(this.id).descrizione(this.descrizione).codice(this.codice)
 				.dataIn(this.dataIn).dataOut(this.dataOut).importo(this.importo)
+				.azienda(this.azienda.buildAziendaModel()).risorse(RisorsaDTO.createRisorsaSetFromDTOList(this.risorse))
 				.build();
 		return result;
 	}
@@ -68,31 +62,33 @@ public class CommessaDTO {
 
 		CommessaDTO result = CommessaDTO.builder().id(commessaModel.getId()).descrizione(commessaModel.getDescrizione())
 				.codice(commessaModel.getCodice()).dataIn(commessaModel.getDataIn()).dataOut(commessaModel.getDataOut())
-				.importo(commessaModel.getImporto()).build();
+				.importo(commessaModel.getImporto())
+				.azienda(AziendaDTO.buildAziendaDTOFromModel(commessaModel.getAzienda()))
+				.risorse(RisorsaDTO.createRisorsaDTOListFromModelSet(commessaModel.getRisorse())).build();
 		return result;
 	}
-	
-	public static List<CommessaDTO> createCommessaDTOListFromModelList(List<Commessa> modelListInput){
+
+	public static List<CommessaDTO> createCommessaDTOListFromModelList(List<Commessa> modelListInput) {
 		return modelListInput.stream().map(inputEntity -> {
 			return CommessaDTO.buildCommessaDTOFromModel(inputEntity);
 		}).collect(Collectors.toList());
 	}
-	
+
 	public static Set<CommessaDTO> createCommessaDTOSetFromModelSet(Set<Commessa> modelListInput) {
 		return modelListInput.stream().map(commessaItem -> {
-		return CommessaDTO.buildCommessaDTOFromModel(commessaItem);
+			return CommessaDTO.buildCommessaDTOFromModel(commessaItem);
 		}).collect(Collectors.toSet());
-		}
-	
+	}
+
 	public static List<CommessaDTO> createCommessaDTOListFromModelSet(Set<Commessa> modelListInput) {
 		return modelListInput.stream().map(commessaItem -> {
-		return CommessaDTO.buildCommessaDTOFromModel(commessaItem);
+			return CommessaDTO.buildCommessaDTOFromModel(commessaItem);
 		}).collect(Collectors.toList());
-		}
+	}
 
 	public static Set<Commessa> createCommessaSetFromDTOList(List<CommessaDTO> modelListInput) {
 		return modelListInput.stream().map(commessaItem -> {
-		return commessaItem.buildCommessaModel();
+			return commessaItem.buildCommessaModel();
 		}).collect(Collectors.toSet());
-		}
+	}
 }
