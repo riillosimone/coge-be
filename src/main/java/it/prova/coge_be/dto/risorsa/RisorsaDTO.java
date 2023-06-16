@@ -42,13 +42,18 @@ public class RisorsaDTO {
 	private Integer costoGiornaliero;
 
 	private AttachmentDTO cv;
-	
+
 	private List<CommessaDTO> commesse;
 
 	public Risorsa buildModelFromDTO() {
 		return Risorsa.builder().id(this.id).nome(this.nome).cognome(this.cognome).dataIn(this.dataIn)
 				.dataOut(this.dataOut).cf(this.cf).email(this.email).costoGiornaliero(this.costoGiornaliero)
+<<<<<<< HEAD
 				.cv(this.cv.buildModelFromDTO()).commesse(CommessaDTO.createCommessaSetFromDTOList(this.commesse)).build();
+=======
+				.cv(this.cv.buildModelFromDTO()).commesse(CommessaDTO.createCommessaSetFromDTOList(this.commesse))
+				.build();
+>>>>>>> 65b7a7e3b2f62ca8d2e7e6ed98df818044900595
 	}
 
 	public static RisorsaDTO buildRisorsaDTOFromModel(Risorsa risorsaModel) {
@@ -56,7 +61,8 @@ public class RisorsaDTO {
 				.cognome(risorsaModel.getCognome()).dataIn(risorsaModel.getDataIn()).dataOut(risorsaModel.getDataOut())
 				.cf(risorsaModel.getCf()).email(risorsaModel.getEmail())
 				.costoGiornaliero(risorsaModel.getCostoGiornaliero())
-				.cv(AttachmentDTO.buildAttachmentDTOFromModel(risorsaModel.getCv())).build();
+				.cv(AttachmentDTO.buildAttachmentDTOFromModel(risorsaModel.getCv()))
+				.commesse(CommessaDTO.createCommessaDTOListFromModelSet(risorsaModel.getCommesse())).build();
 		return result;
 	}
 
@@ -65,13 +71,13 @@ public class RisorsaDTO {
 			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem);
 		}).collect(Collectors.toList());
 	}
-	
+
 	public static List<RisorsaDTO> createRisorsaDTOListFromModelSet(Set<Risorsa> modelListInput) {
 		return modelListInput.stream().map(risorsaItem -> {
 			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem);
 		}).collect(Collectors.toList());
 	}
-	
+
 	public static Set<Risorsa> createRisorsaSetFromDTOList(List<RisorsaDTO> modelListInput) {
 		return modelListInput.stream().map(risorsaItem -> {
 			return risorsaItem.buildModelFromDTO();
