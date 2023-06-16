@@ -47,7 +47,7 @@ public class RisorsaDTO {
 	public Risorsa buildModelFromDTO() {
 		return Risorsa.builder().id(this.id).nome(this.nome).cognome(this.cognome).dataIn(this.dataIn)
 				.dataOut(this.dataOut).cf(this.cf).email(this.email).costoGiornaliero(this.costoGiornaliero)
-				.cv(this.cv.buildModelFromDTO()).build();
+				.cv(this.cv.buildModelFromDTO()).commesse(CommessaDTO.createCommessaDTOListFromModelList(this.commesse)).build();
 	}
 
 	public static RisorsaDTO buildRisorsaDTOFromModel(Risorsa risorsaModel) {
@@ -65,9 +65,15 @@ public class RisorsaDTO {
 		}).collect(Collectors.toList());
 	}
 	
-	public static Set<RisorsaDTO> createRisorsaDTOSetFromModelSet(Set<Risorsa> modelListInput) {
+	public static List<RisorsaDTO> createRisorsaDTOListFromModelSet(Set<Risorsa> modelListInput) {
 		return modelListInput.stream().map(risorsaItem -> {
 			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem);
+		}).collect(Collectors.toList());
+	}
+	
+	public static Set<Risorsa> createRisorsaSetFromDTOList(List<RisorsaDTO> modelListInput) {
+		return modelListInput.stream().map(risorsaItem -> {
+			return risorsaItem.buildModelFromDTO();
 		}).collect(Collectors.toSet());
 	}
 
