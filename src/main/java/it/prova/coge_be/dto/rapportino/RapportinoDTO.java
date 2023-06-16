@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import it.prova.coge_be.dto.commessa.CommessaDTO;
+import it.prova.coge_be.dto.risorsa.RisorsaDTO;
 import it.prova.coge_be.model.Rapportino;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,8 +38,11 @@ public class RapportinoDTO {
 	@Valid
 	private CommessaDTO commessa;
 	
+	@Valid
+	private RisorsaDTO risorsa;
+	
 	public Rapportino buildRapportinoModel() {
-		Rapportino result = Rapportino.builder().id(this.id).numeroGiorni(this.numeroGiorni).commessa(this.commessa.buildCommessaModel()).build();
+		Rapportino result = Rapportino.builder().id(this.id).numeroGiorni(this.numeroGiorni).commessa(this.commessa.buildCommessaModel()).risorsa(this.risorsa.buildModelFromDTO()).build();
 		return result;
 	}
 	
@@ -53,9 +57,16 @@ public class RapportinoDTO {
 		}).collect(Collectors.toList());
 	}
 	
-	public static Set<RapportinoDTO> createRapportinoDTOSetFromModelSet(Set<Rapportino> modelListInput) {
+	public static List<RapportinoDTO> createRapportinoDTOListFromModelSet(Set<Rapportino> modelListInput) {
 		return modelListInput.stream().map(rapportinoItem -> {
 		return RapportinoDTO.buildRapportinoDTOFromModel(rapportinoItem);
+		}).collect(Collectors.toList());
+		}
+	
+	
+	public static Set<Rapportino> createRapportinoSetFromDTOList(List<RapportinoDTO> modelListInput) {
+		return modelListInput.stream().map(rapportinoItem -> {
+		return rapportinoItem.buildRapportinoModel();
 		}).collect(Collectors.toSet());
 		}
 	

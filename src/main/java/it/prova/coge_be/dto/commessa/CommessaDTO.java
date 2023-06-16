@@ -81,4 +81,9 @@ public class CommessaDTO {
 		}).collect(Collectors.toSet());
 		}
 
+	public static Set<Commessa> createCommessaSetFromDTOList(List<CommessaDTO> modelListInput) {
+		return modelListInput.stream().map(commessaItem -> {
+		return commessaItem.buildCommessaModel();
+		}).collect(Collectors.toSet());
+		}
 }
