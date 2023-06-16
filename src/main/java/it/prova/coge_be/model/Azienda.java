@@ -40,5 +40,7 @@ public class Azienda {
 	@Builder.Default
 	private Set<Commessa> commesse = new HashSet<>();
 	
+	
+	
 
 }
