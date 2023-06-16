@@ -48,12 +48,8 @@ public class RisorsaDTO {
 	public Risorsa buildModelFromDTO() {
 		return Risorsa.builder().id(this.id).nome(this.nome).cognome(this.cognome).dataIn(this.dataIn)
 				.dataOut(this.dataOut).cf(this.cf).email(this.email).costoGiornaliero(this.costoGiornaliero)
-<<<<<<< HEAD
-				.cv(this.cv.buildModelFromDTO()).commesse(CommessaDTO.createCommessaSetFromDTOList(this.commesse)).build();
-=======
 				.cv(this.cv.buildModelFromDTO()).commesse(CommessaDTO.createCommessaSetFromDTOList(this.commesse))
 				.build();
->>>>>>> 65b7a7e3b2f62ca8d2e7e6ed98df818044900595
 	}
 
 	public static RisorsaDTO buildRisorsaDTOFromModel(Risorsa risorsaModel) {
