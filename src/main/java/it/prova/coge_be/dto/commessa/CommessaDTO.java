@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import it.prova.coge_be.dto.azienda.AziendaDTO;
+import it.prova.coge_be.dto.risorsa.RisorsaDTO;
 import it.prova.coge_be.model.Commessa;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,6 +49,8 @@ public class CommessaDTO {
 	
 	private AziendaDTO azienda;
 	
+	private List<RisorsaDTO> risorse;
+	
 	
 	
 	
@@ -79,6 +82,12 @@ public class CommessaDTO {
 		return modelListInput.stream().map(commessaItem -> {
 		return CommessaDTO.buildCommessaDTOFromModel(commessaItem);
 		}).collect(Collectors.toSet());
+		}
+	
+	public static List<CommessaDTO> createCommessaDTOListFromModelSet(Set<Commessa> modelListInput) {
+		return modelListInput.stream().map(commessaItem -> {
+		return CommessaDTO.buildCommessaDTOFromModel(commessaItem);
+		}).collect(Collectors.toList());
 		}
 
 	public static Set<Commessa> createCommessaSetFromDTOList(List<CommessaDTO> modelListInput) {

@@ -47,7 +47,7 @@ public class RapportinoDTO {
 	}
 	
 	public static RapportinoDTO buildRapportinoDTOFromModel(Rapportino rapportinoModel) {
-		RapportinoDTO result = RapportinoDTO.builder().id(rapportinoModel.getId()).numeroGiorni(rapportinoModel.getNumeroGiorni()).commessa(CommessaDTO.buildCommessaDTOFromModel(rapportinoModel.getCommessa())).build();
+		RapportinoDTO result = RapportinoDTO.builder().id(rapportinoModel.getId()).numeroGiorni(rapportinoModel.getNumeroGiorni()).commessa(CommessaDTO.buildCommessaDTOFromModel(rapportinoModel.getCommessa())).risorsa(RisorsaDTO.buildRisorsaDTOFromModel(rapportinoModel.getRisorsa())).build();
 		return result;
 	}
 	
