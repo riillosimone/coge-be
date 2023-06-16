@@ -52,25 +52,32 @@ public class RisorsaDTO {
 				.build();
 	}
 
-	public static RisorsaDTO buildRisorsaDTOFromModel(Risorsa risorsaModel) {
+	public static RisorsaDTO buildRisorsaDTOFromModel(Risorsa risorsaModel, boolean includeCv,
+			boolean includesCommesse) {
 		RisorsaDTO result = RisorsaDTO.builder().id(risorsaModel.getId()).nome(risorsaModel.getNome())
 				.cognome(risorsaModel.getCognome()).dataIn(risorsaModel.getDataIn()).dataOut(risorsaModel.getDataOut())
 				.cf(risorsaModel.getCf()).email(risorsaModel.getEmail())
-				.costoGiornaliero(risorsaModel.getCostoGiornaliero())
-				.cv(AttachmentDTO.buildAttachmentDTOFromModel(risorsaModel.getCv()))
-				.commesse(CommessaDTO.createCommessaDTOListFromModelSet(risorsaModel.getCommesse())).build();
+				.costoGiornaliero(risorsaModel.getCostoGiornaliero()).build();
+		if (includeCv) {
+			result.setCv(AttachmentDTO.buildAttachmentDTOFromModel(risorsaModel.getCv()));
+		}
+		if (includesCommesse) {
+			result.setCommesse(CommessaDTO.createCommessaDTOListFromModelSet(risorsaModel.getCommesse()));
+		}
 		return result;
 	}
 
-	public static List<RisorsaDTO> createRisorsaDTOListFromModelList(List<Risorsa> modelListInput) {
+	public static List<RisorsaDTO> createRisorsaDTOListFromModelList(List<Risorsa> modelListInput, boolean includeCv,
+			boolean includesCommesse) {
 		return modelListInput.stream().map(risorsaItem -> {
-			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem);
+			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem,includeCv,includesCommesse);
 		}).collect(Collectors.toList());
 	}
 
-	public static List<RisorsaDTO> createRisorsaDTOListFromModelSet(Set<Risorsa> modelListInput) {
+	public static List<RisorsaDTO> createRisorsaDTOListFromModelSet(Set<Risorsa> modelListInput, boolean includeCv,
+			boolean includesCommesse) {
 		return modelListInput.stream().map(risorsaItem -> {
-			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem);
+			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem,includeCv,includesCommesse);
 		}).collect(Collectors.toList());
 	}
 
