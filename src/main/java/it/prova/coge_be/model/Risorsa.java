@@ -50,8 +50,9 @@ public class Risorsa {
 	@OneToOne(fetch = FetchType.LAZY)
 	private Attachment cv;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	
 	@Builder.Default
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "risorse")
 	private Set<Commessa> commesse = new HashSet<>();
 	
 }
