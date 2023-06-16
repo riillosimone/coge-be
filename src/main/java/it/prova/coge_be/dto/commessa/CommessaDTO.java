@@ -2,6 +2,7 @@ package it.prova.coge_be.dto.commessa;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.Min;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import it.prova.coge_be.dto.azienda.AziendaDTO;
 import it.prova.coge_be.model.Commessa;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +44,13 @@ public class CommessaDTO {
 	@NotNull(message = "{importo.notnull}")
 	@Min(0)
 	private Double importo;
+	
+	
+	private AziendaDTO azienda;
+	
+	
+	
+	
 
 	
 
@@ -65,5 +74,11 @@ public class CommessaDTO {
 			return CommessaDTO.buildCommessaDTOFromModel(inputEntity);
 		}).collect(Collectors.toList());
 	}
+	
+	public static Set<CommessaDTO> createCommessaDTOSetFromModelSet(Set<Commessa> modelListInput) {
+		return modelListInput.stream().map(commessaItem -> {
+		return CommessaDTO.buildCommessaDTOFromModel(commessaItem);
+		}).collect(Collectors.toSet());
+		}
 
 }

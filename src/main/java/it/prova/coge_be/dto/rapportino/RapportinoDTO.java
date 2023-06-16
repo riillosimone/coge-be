@@ -2,6 +2,7 @@ package it.prova.coge_be.dto.rapportino;
 
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -51,6 +52,12 @@ public class RapportinoDTO {
 			return RapportinoDTO.buildRapportinoDTOFromModel(inputEntity);
 		}).collect(Collectors.toList());
 	}
+	
+	public static Set<RapportinoDTO> createRapportinoDTOSetFromModelSet(Set<Rapportino> modelListInput) {
+		return modelListInput.stream().map(rapportinoItem -> {
+		return RapportinoDTO.buildRapportinoDTOFromModel(rapportinoItem);
+		}).collect(Collectors.toSet());
+		}
 	
 	
 }
