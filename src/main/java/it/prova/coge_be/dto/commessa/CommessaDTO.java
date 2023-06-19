@@ -1,6 +1,7 @@
 package it.prova.coge_be.dto.commessa;
 
 import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -57,31 +58,35 @@ public class CommessaDTO {
 		return result;
 	}
 
-	public static CommessaDTO buildCommessaDTOFromModel(Commessa commessaModel) {
+	public static CommessaDTO buildCommessaDTOFromModel(Commessa commessaModel, boolean includeAzienda, boolean includeRisorse) {
 
 		CommessaDTO result = CommessaDTO.builder().id(commessaModel.getId()).descrizione(commessaModel.getDescrizione())
 				.codice(commessaModel.getCodice()).dataIn(commessaModel.getDataIn()).dataOut(commessaModel.getDataOut())
-				.importo(commessaModel.getImporto())
-				.azienda(AziendaDTO.buildAziendaDTOFromModel(commessaModel.getAzienda()))
-				.risorse(RisorsaDTO.createRisorsaDTOListFromModelSet(commessaModel.getRisorse())).build();
+				.importo(commessaModel.getImporto()).build();
+		if(includeAzienda) {
+			result.setAzienda(AziendaDTO.buildAziendaDTOFromModel(commessaModel.getAzienda()));
+		}
+		if(includeRisorse) {
+			result.setRisorse(RisorsaDTO.createRisorsaDTOListFromModelSet(commessaModel.getRisorse(), false, false));
+		}
 		return result;
 	}
 
-	public static List<CommessaDTO> createCommessaDTOListFromModelList(List<Commessa> modelListInput) {
+	public static List<CommessaDTO> createCommessaDTOListFromModelList(List<Commessa> modelListInput,boolean includeAzienda, boolean includeRisorse ) {
 		return modelListInput.stream().map(inputEntity -> {
-			return CommessaDTO.buildCommessaDTOFromModel(inputEntity);
+			return CommessaDTO.buildCommessaDTOFromModel(inputEntity,includeAzienda, includeRisorse);
 		}).collect(Collectors.toList());
 	}
 
-	public static Set<CommessaDTO> createCommessaDTOSetFromModelSet(Set<Commessa> modelListInput) {
+	public static Set<CommessaDTO> createCommessaDTOSetFromModelSet(Set<Commessa> modelListInput, boolean includeAzienda, boolean includeRisorse) {
 		return modelListInput.stream().map(commessaItem -> {
-			return CommessaDTO.buildCommessaDTOFromModel(commessaItem);
+			return CommessaDTO.buildCommessaDTOFromModel(commessaItem, includeAzienda, includeRisorse);
 		}).collect(Collectors.toSet());
 	}
 
-	public static List<CommessaDTO> createCommessaDTOListFromModelSet(Set<Commessa> modelListInput) {
+	public static List<CommessaDTO> createCommessaDTOListFromModelSet(Set<Commessa> modelListInput, boolean includeAzienda, boolean includeRisorse) {
 		return modelListInput.stream().map(commessaItem -> {
-			return CommessaDTO.buildCommessaDTOFromModel(commessaItem);
+			return CommessaDTO.buildCommessaDTOFromModel(commessaItem, includeAzienda, includeRisorse);
 		}).collect(Collectors.toList());
 	}
 
@@ -90,4 +95,20 @@ public class CommessaDTO {
 			return commessaItem.buildCommessaModel();
 		}).collect(Collectors.toSet());
 	}
+	
+	
+	
+//	//public static List<RisorsaDTO> createRisorsaDTOListFromModelList(List<Risorsa> modelListInput, boolean includeCv,
+//	boolean includesCommesse) {
+//return modelListInput.stream().map(risorsaItem -> {
+//	return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem,includeCv,includesCommesse);
+//}).collect(Collectors.toList());
+//}
+//
+//public static List<RisorsaDTO> createRisorsaDTOListFromModelSet(Set<Risorsa> modelListInput, boolean includeCv,
+//	boolean includesCommesse) {
+//return modelListInput.stream().map(risorsaItem -> {
+//	return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem,includeCv,includesCommesse);
+//}).collect(Collectors.toList());
+//}
 }

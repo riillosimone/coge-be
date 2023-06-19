@@ -44,20 +44,26 @@ public class RapportinoDTO {
 		return result;
 	}
 	
-	public static RapportinoDTO buildRapportinoDTOFromModel(Rapportino rapportinoModel) {
-		RapportinoDTO result = RapportinoDTO.builder().id(rapportinoModel.getId()).numeroGiorni(rapportinoModel.getNumeroGiorni()).commessa(CommessaDTO.buildCommessaDTOFromModel(rapportinoModel.getCommessa())).risorsa(RisorsaDTO.buildRisorsaDTOFromModel(rapportinoModel.getRisorsa())).build();
+	public static RapportinoDTO buildRapportinoDTOFromModel(Rapportino rapportinoModel, boolean includeCommessa, boolean includeRisorsa) {
+		RapportinoDTO result = RapportinoDTO.builder().id(rapportinoModel.getId()).numeroGiorni(rapportinoModel.getNumeroGiorni()).build();
+		if(includeCommessa) {
+			result.setCommessa(CommessaDTO.buildCommessaDTOFromModel(rapportinoModel.getCommessa(), false, false));
+		}
+		if(includeRisorsa) {
+			result.setRisorsa(RisorsaDTO.buildRisorsaDTOFromModel(rapportinoModel.getRisorsa(), false, false));
+		}
 		return result;
 	}
 	
-	public static List<RapportinoDTO> createRapportinoDTOListFromModelList(List<Rapportino> modelListInput){
+	public static List<RapportinoDTO> createRapportinoDTOListFromModelList(List<Rapportino> modelListInput,boolean includeCommessa, boolean includeRisorsa){
 		return modelListInput.stream().map(inputEntity -> {
-			return RapportinoDTO.buildRapportinoDTOFromModel(inputEntity);
+			return RapportinoDTO.buildRapportinoDTOFromModel(inputEntity, includeCommessa, includeRisorsa);
 		}).collect(Collectors.toList());
 	}
 	
-	public static List<RapportinoDTO> createRapportinoDTOListFromModelSet(Set<Rapportino> modelListInput) {
+	public static List<RapportinoDTO> createRapportinoDTOListFromModelSet(Set<Rapportino> modelListInput, boolean includeCommessa, boolean includeRisorsa) {
 		return modelListInput.stream().map(rapportinoItem -> {
-		return RapportinoDTO.buildRapportinoDTOFromModel(rapportinoItem);
+		return RapportinoDTO.buildRapportinoDTOFromModel(rapportinoItem, includeCommessa, includeRisorsa);
 		}).collect(Collectors.toList());
 		}
 	
