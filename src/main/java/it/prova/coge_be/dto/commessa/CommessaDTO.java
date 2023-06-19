@@ -64,7 +64,7 @@ public class CommessaDTO {
 				.codice(commessaModel.getCodice()).dataIn(commessaModel.getDataIn()).dataOut(commessaModel.getDataOut())
 				.importo(commessaModel.getImporto()).build();
 		if(includeAzienda) {
-			result.setAzienda(AziendaDTO.buildAziendaDTOFromModel(commessaModel.getAzienda()));
+			result.setAzienda(AziendaDTO.buildAziendaDTOFromModel(commessaModel.getAzienda(), false));
 		}
 		if(includeRisorse) {
 			result.setRisorse(RisorsaDTO.createRisorsaDTOListFromModelSet(commessaModel.getRisorse(), false, false));
