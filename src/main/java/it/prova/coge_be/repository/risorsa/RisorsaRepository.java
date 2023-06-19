@@ -15,16 +15,16 @@ public interface RisorsaRepository extends CrudRepository<Risorsa, Long>{
 	
 	@Query("from Risorsa r join fetch r.commesse c where r.id =?1")
 	Risorsa getSingleEagerWithCommesse(Long id);
-	
-	@Query("from Risorsa r join fetch r.attachment_id a where r.id = ?1")
+//	
+	@Query("from Risorsa r join fetch r.cv a where r.id = ?1")
 	Risorsa getSingleEagerWithAttachment(Long id);
 	
-	@Query("from Risorsa r join fetch r.attachment_id a")
+	@Query("from Risorsa r join fetch r.cv a")
 	List<Risorsa> getAllEagerWithAttachment();
 	
-	@Query("from Risorsa r join fetch r.commesse c join fetch r.attachment_id a")
+	@Query("from Risorsa r join fetch r.commesse c join fetch r.cv a")
 	List<Risorsa> getAllEager();
 	
-	@Query("from Risorsa r join fetch r.commesse c join fetch r.attachment_id a where r.id = ?1")
+	@Query("from Risorsa r join fetch r.commesse c join fetch r.cv a where r.id = ?1")
 	Risorsa getSingleEager(Long id);
 }
