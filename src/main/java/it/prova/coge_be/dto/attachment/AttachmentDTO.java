@@ -33,17 +33,20 @@ public class AttachmentDTO {
 				.risorsa(this.risorsa.buildModelFromDTO()).build();
 	}
 
-	public static AttachmentDTO buildAttachmentDTOFromModel(Attachment attachmentModel) {
+	public static AttachmentDTO buildAttachmentDTOFromModel(Attachment attachmentModel, boolean includeRisorsa) {
 		AttachmentDTO result = AttachmentDTO.builder().id(attachmentModel.getId())
 				.contentType(attachmentModel.getContentType()).descrizione(attachmentModel.getDescrizione())
 				.dataCreazione(attachmentModel.getDataCreazione()).payload(attachmentModel.getPayload())
-				.risorsa(RisorsaDTO.buildRisorsaDTOFromModel(attachmentModel.getRisorsa())).build();
+				.build();
+		if (includeRisorsa) {
+			result.setRisorsa(RisorsaDTO.buildRisorsaDTOFromModel(attachmentModel.getRisorsa(), includeRisorsa,false));
+		}
 		return result;
 	}
 
-	public static List<AttachmentDTO> createAttachmentDTOListFromModelList(List<Attachment> modelListInput) {
+	public static List<AttachmentDTO> createAttachmentDTOListFromModelList(List<Attachment> modelListInput,boolean includeRisorsa) {
 		return modelListInput.stream().map(attachmentItem -> {
-			return AttachmentDTO.buildAttachmentDTOFromModel(attachmentItem);
+			return AttachmentDTO.buildAttachmentDTOFromModel(attachmentItem,includeRisorsa);
 		}).collect(Collectors.toList());
 	}
 }

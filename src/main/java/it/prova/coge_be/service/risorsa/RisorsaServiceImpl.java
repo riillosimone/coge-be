@@ -45,4 +45,34 @@ public class RisorsaServiceImpl implements RisorsaService{
 	public void rimuoviById(Long idToRemove) {
 		repository.deleteById(idToRemove);
 	}
+
+	@Override
+	public List<Risorsa> listAllElementsEagerWithCommesse() {
+		return repository.getAllEagerWithCommesse();
+	}
+
+	@Override
+	public List<Risorsa> listAllElementsEagerWithAttachment() {
+		return repository.getAllEagerWithAttachment();
+	}
+
+	@Override
+	public List<Risorsa> listAllElementsEager() {
+		return repository.getAllEager();
+	}
+
+	@Override
+	public Risorsa caricaSingoloElementoEager(Long id) {
+		return repository.getSingleEager(id);
+	}
+
+	@Override
+	public Risorsa caricaSingoloElementoEagerWithCommesse(Long id) {
+		return repository.getSingleEagerWithCommesse(id);
+	}
+
+	@Override
+	public Risorsa caricaSingoloElementoEagerWithAttachment(Long id) {
+		return repository.getSingleEagerWithAttachment(id);
+	}
 }

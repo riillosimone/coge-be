@@ -59,7 +59,7 @@ public class RisorsaDTO {
 				.cf(risorsaModel.getCf()).email(risorsaModel.getEmail())
 				.costoGiornaliero(risorsaModel.getCostoGiornaliero()).build();
 		if (includeCv) {
-			result.setCv(AttachmentDTO.buildAttachmentDTOFromModel(risorsaModel.getCv()));
+			result.setCv(AttachmentDTO.buildAttachmentDTOFromModel(risorsaModel.getCv(),includeCv));
 		}
 		if (includesCommesse) {
 			result.setCommesse(CommessaDTO.createCommessaDTOListFromModelSet(risorsaModel.getCommesse()));
