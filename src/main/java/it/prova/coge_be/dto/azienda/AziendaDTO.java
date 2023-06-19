@@ -43,7 +43,7 @@ public class AziendaDTO {
 		AziendaDTO result= AziendaDTO.builder().id(aziendaModel.getId()).ragioneSociale(aziendaModel.getRagioneSociale()).partitaIva(aziendaModel.getPartivaIva()).indirizzo(aziendaModel.getIndirizzo()).build();
 		
 		if (includesCommesse) {
-			result.setCommesse(CommessaDTO.createCommessaDTOListFromModelSet(aziendaModel.getCommesse()));
+			result.setCommesse(CommessaDTO.createCommessaDTOListFromModelSet(aziendaModel.getCommesse(), true, false));
 		}
 		return result;
 		
