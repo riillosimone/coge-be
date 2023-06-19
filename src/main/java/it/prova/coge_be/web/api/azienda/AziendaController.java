@@ -2,6 +2,8 @@ package it.prova.coge_be.web.api.azienda;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,22 +36,25 @@ public class AziendaController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void inserisciDottore(@RequestBody AziendaDTO aziendaInstance) {
+	public AziendaDTO inserisciNuovo(@Valid @RequestBody AziendaDTO aziendaInstance) {
 
 //		if (aziendaInstance.getId() != null)
 //			throw new IdNotNullForInsertException("impossibile creare un id per la creazione.");
 
 		aziendaService.inserisciNuovo(aziendaInstance.buildAziendaModel());
+		return aziendaInstance;
 
 	}
 	
 	
 
 	@PutMapping("/{id}")
-	public void update(@RequestBody AziendaDTO aziendaInstance) {
+	public AziendaDTO update(@Valid @RequestBody AziendaDTO aziendaInstance) {
 		
 
 		aziendaService.aggiorna(aziendaInstance.buildAziendaModel());
+		
+		return aziendaInstance;
 	}
 	
 	
