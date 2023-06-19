@@ -35,19 +35,23 @@ public class AziendaDTO {
 	
 	
 	public Azienda buildAziendaModel() {
-		return Azienda.builder().id(this.id).ragioneSociale(this.ragioneSociale).partivaIva(this.partitaIva).indirizzo(this.indirizzo).commesse(CommessaDTO.createCommessaSetFromDTOList(this.commesse)).build();
+		return Azienda.builder().id(this.id).ragioneSociale(this.ragioneSociale).partivaIva(this.partitaIva).indirizzo(this.indirizzo).build();
 	}
 	
 	
-	public static AziendaDTO buildAziendaDTOFromModel(Azienda aziendaModel) {
-		AziendaDTO result= AziendaDTO.builder().id(aziendaModel.getId()).ragioneSociale(aziendaModel.getRagioneSociale()).partitaIva(aziendaModel.getPartivaIva()).indirizzo(aziendaModel.getIndirizzo()).commesse(CommessaDTO.createCommessaDTOListFromModelSet(aziendaModel.getCommesse())).build();
+	public static AziendaDTO buildAziendaDTOFromModel(Azienda aziendaModel, boolean includesCommesse) {
+		AziendaDTO result= AziendaDTO.builder().id(aziendaModel.getId()).ragioneSociale(aziendaModel.getRagioneSociale()).partitaIva(aziendaModel.getPartivaIva()).indirizzo(aziendaModel.getIndirizzo()).build();
+		
+		if (includesCommesse) {
+			result.setCommesse(CommessaDTO.createCommessaDTOListFromModelSet(aziendaModel.getCommesse()));
+		}
 		return result;
 		
 	}
 	
-	public static List<AziendaDTO> createAziendaDTOFromModelList(List<Azienda> modelListInput){
+	public static List<AziendaDTO> createAziendaDTOListFromModelList(List<Azienda> modelListInput, boolean includesCommesse){
 		return modelListInput.stream().map(aziendaEntity -> {
-			AziendaDTO result = AziendaDTO.buildAziendaDTOFromModel(aziendaEntity);
+			AziendaDTO result = AziendaDTO.buildAziendaDTOFromModel(aziendaEntity, includesCommesse);
 			
 			return result;
 		}).collect(Collectors.toList());
@@ -60,9 +64,9 @@ public class AziendaDTO {
 		}
 	
 	
-	public static List<AziendaDTO> createAziendaListFromModelSet(Set<Azienda> modelSetInput) {
+	public static List<AziendaDTO> createAziendaListFromModelSet(Set<Azienda> modelSetInput, boolean includesCommesse) {
 		return modelSetInput.stream().map(aziendaItem -> {
-		return AziendaDTO.buildAziendaDTOFromModel(aziendaItem);
+		return AziendaDTO.buildAziendaDTOFromModel(aziendaItem, includesCommesse);
 		}).collect(Collectors.toList());
 		}
 	
