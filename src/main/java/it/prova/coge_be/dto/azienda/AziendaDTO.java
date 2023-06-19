@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import it.prova.coge_be.dto.commessa.CommessaDTO;
 import it.prova.coge_be.model.Azienda;
 import lombok.AllArgsConstructor;
@@ -17,6 +19,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class AziendaDTO {
 	private Long id;
 	

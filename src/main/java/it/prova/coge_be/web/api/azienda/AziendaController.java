@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,17 +23,22 @@ import it.prova.coge_be.service.azienda.AziendaService;
 
 @RestController
 @RequestMapping("api/azienda")
+@CrossOrigin
 public class AziendaController {
 	
 	
 	@Autowired
-	AziendaService aziendaService;
+	private AziendaService aziendaService;
 	
 	@GetMapping
 	public List<AziendaDTO> getAll() {
 		return AziendaDTO.createAziendaDTOListFromModelList(aziendaService.listAll(),false);
 	}
 	
+	@GetMapping("/{id}")
+	public AziendaDTO caricaSingolo(@PathVariable(required = true) Long id) {
+		return AziendaDTO.buildAziendaDTOFromModel(aziendaService.caricaSingolo(id), false);
+	}	
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -41,8 +47,7 @@ public class AziendaController {
 //		if (aziendaInstance.getId() != null)
 //			throw new IdNotNullForInsertException("impossibile creare un id per la creazione.");
 
-		aziendaService.inserisciNuovo(aziendaInstance.buildAziendaModel());
-		return aziendaInstance;
+		return AziendaDTO.buildAziendaDTOFromModel(aziendaService.inserisciNuovo(aziendaInstance.buildAziendaModel()), false);
 
 	}
 	
@@ -52,9 +57,8 @@ public class AziendaController {
 	public AziendaDTO update(@Valid @RequestBody AziendaDTO aziendaInstance) {
 		
 
-		aziendaService.aggiorna(aziendaInstance.buildAziendaModel());
+		return AziendaDTO.buildAziendaDTOFromModel(aziendaService.aggiorna(aziendaInstance.buildAziendaModel()),false);
 		
-		return aziendaInstance;
 	}
 	
 	
@@ -62,11 +66,13 @@ public class AziendaController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable(required = true) Long id) {
 		Azienda aziendaDaEliminare = aziendaService.caricaSingolo(id);
+		
 //
 //		if (aziendaDaEliminare == null)
 //			throw new DottoreNotFoundException("non è stato trovato alcun dottore.");
 
-		aziendaService.rimuovi(aziendaDaEliminare);
+		
+		AziendaDTO.buildAziendaDTOFromModel(aziendaDaEliminare, false);
 	}
 	
 	
