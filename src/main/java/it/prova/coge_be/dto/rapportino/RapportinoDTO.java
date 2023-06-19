@@ -26,7 +26,6 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RapportinoDTO {
 	
-	@NotNull(message = "{id.notnull}")
 	private Long id;
 	
 	@NotNull(message = "{numeroGiorni.notnull}")
@@ -40,7 +39,7 @@ public class RapportinoDTO {
 	private RisorsaDTO risorsa;
 	
 	public Rapportino buildRapportinoModel() {
-		Rapportino result = Rapportino.builder().id(this.id).numeroGiorni(this.numeroGiorni).commessa(this.commessa.buildCommessaModel()).risorsa(this.risorsa.buildModelFromDTO()).build();
+		Rapportino result = Rapportino.builder().id(this.id).numeroGiorni(this.numeroGiorni).risorsa(this.risorsa.buildModelFromDTO()).build();
 		return result;
 	}
 	

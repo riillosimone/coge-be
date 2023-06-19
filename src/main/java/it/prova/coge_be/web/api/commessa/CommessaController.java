@@ -27,9 +27,10 @@ public class CommessaController {
 	@Autowired
 	private CommessaService commessaService;
 	
+	
 	@GetMapping
 	public List<CommessaDTO> visualizzaCommesse(){
-		return CommessaDTO.createCommessaDTOListFromModelList(commessaService.listAll(), false, false);
+		return CommessaDTO.createCommessaDTOListFromModelList(commessaService.listAll(), true, false);
 		
 	}
 	
@@ -42,14 +43,10 @@ public class CommessaController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public CommessaDTO createNew(@Valid @RequestBody CommessaDTO commessaInput) {
-		if(commessaInput.getId() != null) {
-			throw new RuntimeException();
-		}
+		
 		
 		Commessa commessaInserita = commessaService.inserisciNuovo(commessaInput.buildCommessaModel());
-		
-		
-		return CommessaDTO.buildCommessaDTOFromModel(commessaInserita, false, false);
+		return CommessaDTO.buildCommessaDTOFromModel(commessaInserita, true, false);
 	}
 	
 	@PutMapping("{id}")

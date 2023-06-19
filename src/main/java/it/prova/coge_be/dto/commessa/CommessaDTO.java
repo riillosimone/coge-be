@@ -28,7 +28,6 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CommessaDTO {
 
-	@NotNull(message = "{id.notnull}")
 	private Long id;
 
 	@NotBlank(message = "{descrizione.notblank}")
@@ -52,8 +51,7 @@ public class CommessaDTO {
 
 	public Commessa buildCommessaModel() {
 		Commessa result = Commessa.builder().id(this.id).descrizione(this.descrizione).codice(this.codice)
-				.dataIn(this.dataIn).dataOut(this.dataOut).importo(this.importo)
-				.azienda(this.azienda.buildAziendaModel()).risorse(RisorsaDTO.createRisorsaSetFromDTOList(this.risorse))
+				.dataIn(this.dataIn).dataOut(this.dataOut).importo(this.importo).azienda(this.azienda.buildAziendaModel())
 				.build();
 		return result;
 	}
@@ -64,7 +62,7 @@ public class CommessaDTO {
 				.codice(commessaModel.getCodice()).dataIn(commessaModel.getDataIn()).dataOut(commessaModel.getDataOut())
 				.importo(commessaModel.getImporto()).build();
 		if(includeAzienda) {
-			result.setAzienda(AziendaDTO.buildAziendaDTOFromModel(commessaModel.getAzienda(), false));
+			result.setAzienda(AziendaDTO.buildAziendaDTOFromModel(commessaModel.getAzienda(), true));
 		}
 		if(includeRisorse) {
 			result.setRisorse(RisorsaDTO.createRisorsaDTOListFromModelSet(commessaModel.getRisorse(), false, false));

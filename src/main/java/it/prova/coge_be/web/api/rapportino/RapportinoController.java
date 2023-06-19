@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import it.prova.coge_be.dto.rapportino.RapportinoDTO;
 import it.prova.coge_be.model.Rapportino;
 import it.prova.coge_be.service.rapportino.RapportinoService;
-
-public class RapportinoController {
-	@RestController
+@RestController
 	@RequestMapping("api/rapportino")
-	public class CommessaController {
+public class RapportinoController {
+	
+	
 		
 		@Autowired
 		private RapportinoService rapportinoService;
@@ -73,7 +73,7 @@ public class RapportinoController {
 			rapportinoService.rimuovi(id);
 		}
   }
-}	
+	
 	
 	
 	
