@@ -62,7 +62,7 @@ public class RisorsaDTO {
 			result.setCv(AttachmentDTO.buildAttachmentDTOFromModel(risorsaModel.getCv(),includeCv));
 		}
 		if (includesCommesse) {
-			result.setCommesse(CommessaDTO.createCommessaDTOListFromModelSet(risorsaModel.getCommesse()));
+			result.setCommesse(CommessaDTO.createCommessaDTOListFromModelSet(risorsaModel.getCommesse(),false,false));
 		}
 		return result;
 	}
