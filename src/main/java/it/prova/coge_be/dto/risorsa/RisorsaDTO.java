@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import it.prova.coge_be.dto.attachment.AttachmentDTO;
 import it.prova.coge_be.dto.commessa.CommessaDTO;
 import it.prova.coge_be.model.Risorsa;
@@ -20,6 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RisorsaDTO {
 
 	private Long id;
@@ -48,7 +51,6 @@ public class RisorsaDTO {
 	public Risorsa buildModelFromDTO() {
 		return Risorsa.builder().id(this.id).nome(this.nome).cognome(this.cognome).dataIn(this.dataIn)
 				.dataOut(this.dataOut).cf(this.cf).email(this.email).costoGiornaliero(this.costoGiornaliero)
-				.cv(this.cv.buildModelFromDTO()).commesse(CommessaDTO.createCommessaSetFromDTOList(this.commesse))
 				.build();
 	}
 

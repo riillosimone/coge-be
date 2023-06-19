@@ -29,8 +29,8 @@ public class AttachmentDTO {
 
 	public Attachment buildModelFromDTO() {
 		return Attachment.builder().id(this.id).fileName(this.fileName).contentType(this.contentType)
-				.descrizione(this.descrizione).dataCreazione(this.dataCreazione)
-				.risorsa(this.risorsa.buildModelFromDTO()).build();
+				.descrizione(this.descrizione).dataCreazione(this.dataCreazione).payload(this.payload)
+				.build();
 	}
 
 	public static AttachmentDTO buildAttachmentDTOFromModel(Attachment attachmentModel, boolean includeRisorsa) {

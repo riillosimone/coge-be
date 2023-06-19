@@ -25,6 +25,6 @@ public interface RisorsaRepository extends CrudRepository<Risorsa, Long>{
 	@Query("from Risorsa r join fetch r.commesse c join fetch r.cv a")
 	List<Risorsa> getAllEager();
 	
-	@Query("from Risorsa r join fetch r.commesse c join fetch r.cv a where r.id = ?1")
+	@Query("select r from Risorsa r left join fetch r.commesse c left join fetch r.cv a where r.id = ?1")
 	Risorsa getSingleEager(Long id);
 }
