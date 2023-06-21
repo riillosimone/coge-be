@@ -75,4 +75,9 @@ public class RisorsaServiceImpl implements RisorsaService{
 	public Risorsa caricaSingoloElementoEagerWithAttachment(Long id) {
 		return repository.getSingleEagerWithAttachment(id);
 	}
+
+	@Override
+	public Risorsa riepilogoRisorseConCommesse() {
+		return repository.riepilogoRisorseConCommesse();
+	}
 }

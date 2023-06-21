@@ -71,5 +71,10 @@ public class RisorsaController {
 
 		service.rimuoviById(risorsaDaEliminare.getId());
 	}
+	
+	@GetMapping("/riepilogorisorse")
+	public Risorsa riepilogoRisorseConCommesse() {
+		return service.riepilogoRisorseConCommesse();
+	}
 
 }

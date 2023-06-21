@@ -54,8 +54,9 @@ public class AziendaController {
 	
 
 	@PutMapping("/{id}")
-	public AziendaDTO update(@Valid @RequestBody AziendaDTO aziendaInstance) {
-		
+	public AziendaDTO update(@Valid @RequestBody AziendaDTO aziendaInstance,@PathVariable(required = true) Long id) {
+		aziendaInstance.setId(id);
+
 
 		return AziendaDTO.buildAziendaDTOFromModel(aziendaService.aggiorna(aziendaInstance.buildAziendaModel()),false);
 		
@@ -71,7 +72,7 @@ public class AziendaController {
 //		if (aziendaDaEliminare == null)
 //			throw new DottoreNotFoundException("non è stato trovato alcun dottore.");
 
-		
+		aziendaService.rimuovi(aziendaDaEliminare);
 		AziendaDTO.buildAziendaDTOFromModel(aziendaDaEliminare, false);
 	}
 	

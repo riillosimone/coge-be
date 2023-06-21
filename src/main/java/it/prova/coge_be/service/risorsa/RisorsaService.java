@@ -28,5 +28,7 @@ public interface RisorsaService {
 	public Risorsa inserisciNuovo(Risorsa entityInstance);
 
 	public void rimuoviById(Long idToRemove);
+	
+	public Risorsa riepilogoRisorseConCommesse();
 
 }
