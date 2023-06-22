@@ -39,6 +39,7 @@ public class AttachmentController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	//passare un multipart
 	public AttachmentDTO createNew(@RequestBody AttachmentDTO attachmentDTO) {
 		Attachment attachmentTransient = attachmentDTO.buildModelFromDTO();
 		attachmentService.inserisciNuovo(attachmentTransient);
