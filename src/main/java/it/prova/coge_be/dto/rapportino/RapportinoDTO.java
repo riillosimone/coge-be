@@ -38,6 +38,8 @@ public class RapportinoDTO {
 	
 	private RisorsaDTO risorsa;
 	
+	
+	
 	public Rapportino buildRapportinoModel() {
 		Rapportino result = Rapportino.builder().id(this.id).numeroGiorni(this.numeroGiorni).risorsa(this.risorsa.buildModelFromDTO()).build();
 		return result;
