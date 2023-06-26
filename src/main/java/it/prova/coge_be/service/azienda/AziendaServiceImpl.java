@@ -47,4 +47,9 @@ public class AziendaServiceImpl implements AziendaService {
 
 	}
 
+	@Override
+	public List<Azienda> cercaAziendaCostoDesc() {
+		return repository.findAziendeConCostoDesc();
+	}
+
 }

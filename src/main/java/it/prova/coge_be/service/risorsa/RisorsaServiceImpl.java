@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< Updated upstream
 import it.prova.coge_be.model.Attachment;
+=======
+import it.prova.coge_be.dto.risorsaNumeroCommesse.IRisorsaNumeroCommesseDTO;
+>>>>>>> Stashed changes
 import it.prova.coge_be.model.Risorsa;
 import it.prova.coge_be.repository.attachment.AttachmentRepository;
 import it.prova.coge_be.repository.risorsa.RisorsaRepository;
@@ -94,7 +98,7 @@ public class RisorsaServiceImpl implements RisorsaService {
 	}
 
 	@Override
-	public Risorsa riepilogoRisorseConCommesse() {
+	public List<IRisorsaNumeroCommesseDTO> riepilogoRisorseConCommesse() {
 		return repository.riepilogoRisorseConCommesse();
 	}
 }

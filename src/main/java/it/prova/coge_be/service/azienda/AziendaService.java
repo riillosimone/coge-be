@@ -16,5 +16,7 @@ public interface AziendaService {
 	public Azienda inserisciNuovo(Azienda aziendaInstance);
 
 	public void rimuovi(Azienda aziendaInstance);
+	
+	public List<Azienda> cercaAziendaCostoDesc ();
 
 }

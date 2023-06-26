@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.prova.coge_be.dto.commessaMargine.CommessaMargineDTO;
+import it.prova.coge_be.dto.commessaMargine.ICommessaMargineDTO;
 import it.prova.coge_be.model.Commessa;
 import it.prova.coge_be.repository.commessa.CommessaRepository;
 
@@ -44,6 +46,11 @@ public class CommessaServiceImpl implements CommessaService {
 	public void rimuovi(Long idToDelete) {
 		repository.deleteById(idToDelete);
 		
+	}
+
+	@Override
+	public List<ICommessaMargineDTO> commesseChiuseConMargineDecrescente() {
+		return repository.commesseChiuseConMargineDecrescente();
 	}
 
 }

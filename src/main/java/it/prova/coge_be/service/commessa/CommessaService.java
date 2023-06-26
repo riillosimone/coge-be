@@ -2,6 +2,8 @@ package it.prova.coge_be.service.commessa;
 
 import java.util.List;
 
+import it.prova.coge_be.dto.commessaMargine.CommessaMargineDTO;
+import it.prova.coge_be.dto.commessaMargine.ICommessaMargineDTO;
 import it.prova.coge_be.model.Commessa;
 
 public interface CommessaService {
@@ -14,4 +16,6 @@ public interface CommessaService {
 	public Commessa aggiorna(Commessa commessaInstance);
 	
 	public void rimuovi(Long idToDelete);
+	
+	public List<ICommessaMargineDTO> commesseChiuseConMargineDecrescente();
 }

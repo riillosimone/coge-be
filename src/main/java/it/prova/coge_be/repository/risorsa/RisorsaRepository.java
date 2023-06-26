@@ -2,12 +2,14 @@ package it.prova.coge_be.repository.risorsa;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import it.prova.coge_be.dto.risorsaNumeroCommesse.IRisorsaNumeroCommesseDTO;
 import it.prova.coge_be.model.Risorsa;
 
-public interface RisorsaRepository extends CrudRepository<Risorsa, Long>{
+public interface RisorsaRepository extends CrudRepository<Risorsa, Long>, JpaRepository<Risorsa, Long>{
 
 	
 	@Query("from Risorsa r join fetch r.commesse c")
@@ -29,6 +31,6 @@ public interface RisorsaRepository extends CrudRepository<Risorsa, Long>{
 	Risorsa getSingleEager(Long id);
 	
 	
-	@Query(value="select r.cognome, r.nome, count(c.id) from commessa c inner join commessa_risorsa cr on c.id=cr.commessa_id inner join risorsa r on cr.risorsa_id=r.id group by (r.id)", nativeQuery = true)
-	Risorsa riepilogoRisorseConCommesse();
+	@Query(value="select r.nome as nome, r.cognome as cognome, r.costoGiornaliero as costoGiornaliero, r.cf as cf, count(c.id) as numeroCommesse from commessa c inner join commessa_risorsa cr on c.id=cr.commessa_id inner join risorsa r on cr.risorsa_id=r.id group by (r.id)", nativeQuery = true)
+	List<IRisorsaNumeroCommesseDTO> riepilogoRisorseConCommesse();
 }

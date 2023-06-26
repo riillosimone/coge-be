@@ -76,6 +76,18 @@ public class AziendaController {
 		AziendaDTO.buildAziendaDTOFromModel(aziendaDaEliminare, false);
 	}
 	
+	@GetMapping(value = "/aziendacostodesc")
+	public List<AziendaDTO> aziendaConImportoDesc () {
+		List<Azienda> listaAziendeInOrdine= aziendaService.cercaAziendaCostoDesc();
+		
+		return AziendaDTO.createAziendaDTOListFromModelList(listaAziendeInOrdine, false);
+		
+		
+	}
+	
+	
+	
+	
 	
 	
 	

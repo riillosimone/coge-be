@@ -18,7 +18,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.prova.coge_be.dto.commessa.CommessaDTO;
+<<<<<<< Updated upstream
 import it.prova.coge_be.model.Azienda;
+=======
+import it.prova.coge_be.dto.commessaMargine.CommessaMargineDTO;
+import it.prova.coge_be.dto.commessaMargine.ICommessaMargineDTO;
+>>>>>>> Stashed changes
 import it.prova.coge_be.model.Commessa;
 import it.prova.coge_be.service.azienda.AziendaService;
 import it.prova.coge_be.service.commessa.CommessaService;
@@ -71,5 +76,18 @@ public class CommessaController {
 	public void delete(@PathVariable(required = true) Long id) {
 		commessaService.rimuovi(id);
 	}
+		
+		
+		
+	@GetMapping("/commessechiusemarginedecrescente")
+	public List<ICommessaMargineDTO> commesseChiuseConMargineDecrescente() {
+		List<ICommessaMargineDTO> listaCommesseChiuseConMargineDecr= commessaService.commesseChiuseConMargineDecrescente();
+		
+		return listaCommesseChiuseConMargineDecr;
+		
+	}
+		
+		
+		
 	
 }

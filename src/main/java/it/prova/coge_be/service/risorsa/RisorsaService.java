@@ -2,6 +2,7 @@ package it.prova.coge_be.service.risorsa;
 
 import java.util.List;
 
+import it.prova.coge_be.dto.risorsaNumeroCommesse.IRisorsaNumeroCommesseDTO;
 import it.prova.coge_be.model.Risorsa;
 
 
@@ -29,6 +30,6 @@ public interface RisorsaService {
 
 	public void rimuoviById(Long idToRemove);
 	
-	public Risorsa riepilogoRisorseConCommesse();
+	public List<IRisorsaNumeroCommesseDTO> riepilogoRisorseConCommesse();
 
 }
