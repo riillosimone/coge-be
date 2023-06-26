@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.prova.coge_be.dto.commessa.CommessaDTO;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import it.prova.coge_be.model.Azienda;
 =======
 import it.prova.coge_be.dto.commessaMargine.CommessaMargineDTO;
@@ -30,8 +31,10 @@ import it.prova.coge_be.dto.commessaMargine.ICommessaMargineDTO;
 import it.prova.coge_be.dto.commessa.CommessaPerInsertDTO;
 import it.prova.coge_be.model.Azienda;
 >>>>>>> Stashed changes
+=======
+import it.prova.coge_be.dto.commessaMargine.ICommessaMargineDTO;
+>>>>>>> Stashed changes
 import it.prova.coge_be.model.Commessa;
-import it.prova.coge_be.service.azienda.AziendaService;
 import it.prova.coge_be.service.commessa.CommessaService;
 
 @RestController

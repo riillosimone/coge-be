@@ -13,18 +13,17 @@ import it.prova.coge_be.model.Commessa;
 public interface CommessaRepository extends CrudRepository<Commessa, Long> {
 	
 	
-	@Query(value = "SELECT c.*, subquery.somma_margine " +
-	        "FROM commessa c " +
-	        "JOIN ( " +
-	        "   SELECT c.id, SUM(c.importo - (r.costogiornaliero * rn.numerogiorni)) AS somma_margine " +
-	        "   FROM commessa c " +
-	        "   JOIN commessa_risorsa rc ON c.id = rc.commessa_id " +
-	        "   JOIN risorsa r ON rc.risorsa_id = r.id " +
-	        "   JOIN rapportino rn ON rn.risorsa_id = r.id " +
-	        "   WHERE c.data_out IS NOT NULL " +
-	        "   GROUP BY c.id " +
-	        ") subquery ON c.id = subquery.id " +
-	        "ORDER BY subquery.somma_margine DESC", nativeQuery = true)
+	@Query(value = "SELECT c.*,margine\r\n"
+			+ "FROM commessa c\r\n"
+			+ "JOIN (\r\n"
+			+ "  SELECT c.id, SUM(c.importo - (r.costogiornaliero * rn.numerogiorni)) AS margine\r\n"
+			+ "  FROM commessa c\r\n"
+			+ "  join commessa_risorsa rc on c.id=rc.commessa_id\r\n"
+			+ "  join risorsa r on rc.risorsa_id=r.id\r\n"
+			+ "  join rapportino rn on rn.risorsa_id = r.id\r\n"
+			+ "  GROUP BY c.id \r\n"
+			+ ") subquery ON c.id = subquery.id\r\n"
+			+ "ORDER BY subquery.margine DESC;", nativeQuery = true)
 	List<ICommessaMargineDTO> commesseChiuseConMargineDecrescente();
 	
 }

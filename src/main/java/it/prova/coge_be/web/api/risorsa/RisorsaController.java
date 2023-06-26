@@ -18,11 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.prova.coge_be.dto.risorsa.RisorsaDTO;
-<<<<<<< Updated upstream
 import it.prova.coge_be.model.Attachment;
-=======
 import it.prova.coge_be.dto.risorsaNumeroCommesse.IRisorsaNumeroCommesseDTO;
->>>>>>> Stashed changes
 import it.prova.coge_be.model.Risorsa;
 import it.prova.coge_be.service.risorsa.RisorsaService;
 import it.prova.coge_be.web.api.exception.IdNotNullForInsertException;
