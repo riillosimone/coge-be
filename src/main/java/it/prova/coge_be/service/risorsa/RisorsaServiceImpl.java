@@ -6,16 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.prova.coge_be.model.Attachment;
 import it.prova.coge_be.model.Risorsa;
+import it.prova.coge_be.repository.attachment.AttachmentRepository;
 import it.prova.coge_be.repository.risorsa.RisorsaRepository;
 
 @Service
 @Transactional(readOnly = true)
-public class RisorsaServiceImpl implements RisorsaService{
+public class RisorsaServiceImpl implements RisorsaService {
 
-	
 	@Autowired
 	private RisorsaRepository repository;
+
+	@Autowired
+	private AttachmentRepository attachmentRepository;
 
 	@Override
 	public List<Risorsa> listAllElements() {
@@ -30,13 +34,26 @@ public class RisorsaServiceImpl implements RisorsaService{
 	@Override
 	@Transactional
 	public Risorsa aggiorna(Risorsa entityInstance) {
-		return repository.save(entityInstance);
-		
+
+		Attachment attachmentNuovo = entityInstance.getCv();
+		Risorsa risorsaCaricata = repository.getSingleEagerWithAttachment(entityInstance.getId());
+		if (risorsaCaricata.getCv().getId() != null) {
+			attachmentNuovo.setId(risorsaCaricata.getCv().getId());
+		}
+		attachmentNuovo.setRisorsa(risorsaCaricata);
+		attachmentRepository.save(attachmentNuovo);
+		risorsaCaricata.setCv(attachmentNuovo);
+		return repository.save(risorsaCaricata);
+
 	}
 
 	@Override
 	@Transactional
 	public Risorsa inserisciNuovo(Risorsa entityInstance) {
+		if (entityInstance.getCv() != null) {
+			entityInstance.getCv().setRisorsa(entityInstance);
+			attachmentRepository.save(entityInstance.getCv());
+		}
 		return repository.save(entityInstance);
 	}
 

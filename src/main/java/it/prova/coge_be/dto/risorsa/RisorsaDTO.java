@@ -49,9 +49,13 @@ public class RisorsaDTO {
 	private List<CommessaDTO> commesse;
 
 	public Risorsa buildModelFromDTO() {
-		return Risorsa.builder().id(this.id).nome(this.nome).cognome(this.cognome).dataIn(this.dataIn)
+		Risorsa result = Risorsa.builder().id(this.id).nome(this.nome).cognome(this.cognome).dataIn(this.dataIn)
 				.dataOut(this.dataOut).cf(this.cf).email(this.email).costoGiornaliero(this.costoGiornaliero)
 				.build();
+		if (this.cv != null) {
+			result.setCv(this.cv.buildModelFromDTO());
+		}
+		return result;
 	}
 
 	public static RisorsaDTO buildRisorsaDTOFromModel(Risorsa risorsaModel, boolean includeCv,

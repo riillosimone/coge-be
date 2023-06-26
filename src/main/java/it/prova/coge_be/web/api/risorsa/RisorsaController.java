@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.prova.coge_be.dto.risorsa.RisorsaDTO;
+import it.prova.coge_be.model.Attachment;
 import it.prova.coge_be.model.Risorsa;
 import it.prova.coge_be.service.risorsa.RisorsaService;
 import it.prova.coge_be.web.api.exception.IdNotNullForInsertException;
@@ -38,8 +39,11 @@ public class RisorsaController {
 
 	@GetMapping("/{id}")
 	public RisorsaDTO getSingleEager(@PathVariable(value = "id", required = true) Long id) {
-		return RisorsaDTO.buildRisorsaDTOFromModel(service.caricaSingoloElementoEager(id), false, true);
+		return RisorsaDTO.buildRisorsaDTOFromModel(service.caricaSingoloElementoEager(id), false, false);
 	}
+	
+	
+	
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -48,9 +52,12 @@ public class RisorsaController {
 		if (risorsaInstance.getId() != null)
 			throw new IdNotNullForInsertException("impossibile creare un id per la creazione.");
 
-		Risorsa risorsaInserita = service.inserisciNuovo(risorsaInstance.buildModelFromDTO());
+		Attachment cv = new Attachment();
+		cv.setPayload(risorsaInstance.getCv().getPayload());
+		Risorsa risorsaModel = risorsaInstance.buildModelFromDTO();
+		Risorsa risorsaInserita = service.inserisciNuovo(risorsaModel);
 
-		return RisorsaDTO.buildRisorsaDTOFromModel(risorsaInserita, false, false);
+		return RisorsaDTO.buildRisorsaDTOFromModel(service.caricaSingoloElemento(risorsaInserita.getId()), false, false);
 	}
 
 	@PutMapping("/edit/{id}")

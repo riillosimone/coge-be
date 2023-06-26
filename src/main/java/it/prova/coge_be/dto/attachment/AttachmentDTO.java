@@ -28,9 +28,13 @@ public class AttachmentDTO {
 	private RisorsaDTO risorsa;
 
 	public Attachment buildModelFromDTO() {
-		return Attachment.builder().id(this.id).fileName(this.fileName).contentType(this.contentType)
+		Attachment result = Attachment.builder().id(this.id).fileName(this.fileName).contentType(this.contentType)
 				.descrizione(this.descrizione).dataCreazione(this.dataCreazione).payload(this.payload)
 				.build();
+		if (this.risorsa != null) {
+			result.setRisorsa(this.risorsa.buildModelFromDTO());
+		}
+		return result;
 	}
 
 	public static AttachmentDTO buildAttachmentDTOFromModel(Attachment attachmentModel, boolean includeRisorsa) {

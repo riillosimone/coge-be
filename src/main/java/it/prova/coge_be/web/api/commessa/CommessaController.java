@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.prova.coge_be.dto.commessa.CommessaDTO;
+import it.prova.coge_be.model.Azienda;
 import it.prova.coge_be.model.Commessa;
+import it.prova.coge_be.service.azienda.AziendaService;
 import it.prova.coge_be.service.commessa.CommessaService;
 
 @RestController
@@ -28,7 +30,6 @@ public class CommessaController {
 	
 	@Autowired
 	private CommessaService commessaService;
-	
 	
 	@GetMapping
 	public List<CommessaDTO> visualizzaCommesse(){
@@ -45,7 +46,6 @@ public class CommessaController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public CommessaDTO createNew(@Valid @RequestBody CommessaDTO commessaInput) {
-		
 		
 		Commessa commessaInserita = commessaService.inserisciNuovo(commessaInput.buildCommessaModel());
 		return CommessaDTO.buildCommessaDTOFromModel(commessaInserita, true, false);
