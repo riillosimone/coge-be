@@ -6,9 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< Updated upstream
 import it.prova.coge_be.dto.commessaMargine.CommessaMargineDTO;
 import it.prova.coge_be.dto.commessaMargine.ICommessaMargineDTO;
+=======
+import it.prova.coge_be.model.Azienda;
+>>>>>>> Stashed changes
 import it.prova.coge_be.model.Commessa;
+import it.prova.coge_be.repository.azienda.AziendaRepository;
 import it.prova.coge_be.repository.commessa.CommessaRepository;
 
 @Service
@@ -17,6 +22,9 @@ public class CommessaServiceImpl implements CommessaService {
 	
 	@Autowired
 	private CommessaRepository repository;
+	
+	@Autowired
+	private AziendaRepository aziendaRepository;
 
 	@Override
 	public List<Commessa> listAll() {
@@ -32,6 +40,7 @@ public class CommessaServiceImpl implements CommessaService {
 	@Override
 	@Transactional
 	public Commessa inserisciNuovo(Commessa commessaInstance) {
+		
 		return repository.save(commessaInstance);
 	}
 
