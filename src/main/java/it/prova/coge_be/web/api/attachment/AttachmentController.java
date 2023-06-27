@@ -32,7 +32,7 @@ public class AttachmentController {
 		return AttachmentDTO.createAttachmentDTOListFromModelList(attachmentService.listAllElements(), true);
 	}
 
-	@PutMapping("/{id}")
+	@GetMapping("/{id}")
 	public AttachmentDTO getSingle(@PathVariable(required = true, value = "id") Long id) {
 		return AttachmentDTO.buildAttachmentDTOFromModel(attachmentService.caricaSingoloElemento(id), false);
 	}

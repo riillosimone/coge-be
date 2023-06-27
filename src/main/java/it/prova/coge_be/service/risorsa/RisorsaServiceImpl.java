@@ -61,6 +61,10 @@ public class RisorsaServiceImpl implements RisorsaService {
 	@Override
 	@Transactional
 	public void rimuoviById(Long idToRemove) {
+		Risorsa risorsaCaricata = this.caricaSingoloElementoEager(idToRemove);
+		if(risorsaCaricata.getCv() != null) {
+			attachmentRepository.deleteById(risorsaCaricata.getCv().getId());
+		}
 		repository.deleteById(idToRemove);
 	}
 

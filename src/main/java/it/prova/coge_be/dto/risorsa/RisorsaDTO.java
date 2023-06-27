@@ -64,7 +64,7 @@ public class RisorsaDTO {
 				.cognome(risorsaModel.getCognome()).dataIn(risorsaModel.getDataIn()).dataOut(risorsaModel.getDataOut())
 				.cf(risorsaModel.getCf()).email(risorsaModel.getEmail())
 				.costoGiornaliero(risorsaModel.getCostoGiornaliero()).build();
-		if (includeCv) {
+		if (risorsaModel.getCv()!=null) {
 			result.setCv(AttachmentDTO.buildAttachmentDTOFromModel(risorsaModel.getCv(),includeCv));
 		}
 		if (includesCommesse) {

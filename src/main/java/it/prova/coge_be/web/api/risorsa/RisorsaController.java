@@ -40,7 +40,7 @@ public class RisorsaController {
 
 	@GetMapping("/{id}")
 	public RisorsaDTO getSingleEager(@PathVariable(value = "id", required = true) Long id) {
-		return RisorsaDTO.buildRisorsaDTOFromModel(service.caricaSingoloElementoEager(id), false, false);
+		return RisorsaDTO.buildRisorsaDTOFromModel(service.caricaSingoloElementoEager(id), true, false);
 	}
 	
 	

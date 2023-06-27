@@ -42,9 +42,7 @@ public class AttachmentDTO {
 				.contentType(attachmentModel.getContentType()).descrizione(attachmentModel.getDescrizione())
 				.dataCreazione(attachmentModel.getDataCreazione()).payload(attachmentModel.getPayload())
 				.build();
-		if (includeRisorsa) {
-			result.setRisorsa(RisorsaDTO.buildRisorsaDTOFromModel(attachmentModel.getRisorsa(), includeRisorsa,false));
-		}
+		
 		return result;
 	}
 
