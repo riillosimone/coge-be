@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.prova.coge_be.dto.rapportino.RapportinoDTO;
 import it.prova.coge_be.dto.rapportino.RapportinoPerInsertDTO;
+import it.prova.coge_be.model.Commessa;
 import it.prova.coge_be.model.Rapportino;
 import it.prova.coge_be.model.Risorsa;
+import it.prova.coge_be.service.commessa.CommessaService;
 import it.prova.coge_be.service.rapportino.RapportinoService;
 import it.prova.coge_be.service.risorsa.RisorsaService;
 
@@ -36,15 +38,18 @@ public class RapportinoController {
 		@Autowired
 		private RisorsaService risorsaService;
 		
+		@Autowired
+		private CommessaService commessaService;
+		
 		@GetMapping
 		public List<RapportinoDTO> visualizzaRapportini(){
-			return RapportinoDTO.createRapportinoDTOListFromModelList(rapportinoService.listAll(), false, false);
+			return RapportinoDTO.createRapportinoDTOListFromModelList(rapportinoService.listAllElementsEager(), false, true);
 			
 		}
 		
 		@GetMapping("/{id}")
 		public RapportinoDTO visualizza (@PathVariable(required = true) Long id) {
-			return RapportinoDTO.buildRapportinoDTOFromModel(rapportinoService.caricaSingoloElemento(id), false, false);
+			return RapportinoDTO.buildRapportinoDTOFromModel(rapportinoService.caricaElementoEager(id), true, true);
 		}
 		
 		
@@ -54,10 +59,12 @@ public class RapportinoController {
 			if(rapportinoInput.getId() != null) {
 				throw new RuntimeException();
 			}
-			Risorsa risorsaCaricata = risorsaService.caricaSingoloElemento(rapportinoInput.getRisorsa_id());
+			Risorsa risorsaCaricata = risorsaService.caricaSingoloElemento(rapportinoInput.getRisorsa());
+			Commessa commessaCaricata = commessaService.caricaSingoloElemento(rapportinoInput.getCommessa());
 			Rapportino rapportino = new Rapportino();
 			rapportino.setNumeroGiorni(rapportinoInput.getNumeroGiorni());
 			rapportino.setRisorsa(risorsaCaricata);
+			rapportino.setCommessa(commessaCaricata);
 			Rapportino rapportinoInserito = rapportinoService.inserisciNuovo(rapportino);
 //			rapportinoInserito.setRisorsa(risorsaCaricata);
 			
@@ -71,9 +78,11 @@ public class RapportinoController {
 		    if (rapportinoEsistente == null) {
 		        throw new RuntimeException("Rapportino non trovato con id: " + id);
 		    }
-		    Risorsa risorsaCaricata = risorsaService.caricaSingoloElemento(rapportinoInput.getRisorsa_id());
+		    Risorsa risorsaCaricata = risorsaService.caricaSingoloElemento(rapportinoInput.getRisorsa());
+		    Commessa commessaCaricata = commessaService.caricaSingoloElemento(rapportinoInput.getCommessa());
 		    rapportinoEsistente.setNumeroGiorni(rapportinoInput.getNumeroGiorni());
 		    rapportinoEsistente.setRisorsa(risorsaCaricata);
+		    rapportinoEsistente.setCommessa(commessaCaricata);
 		    Rapportino rapportinoAggiornato = rapportinoService.aggiorna(rapportinoEsistente);
 
 		    return RapportinoDTO.buildRapportinoDTOFromModel(rapportinoAggiornato, false, false);

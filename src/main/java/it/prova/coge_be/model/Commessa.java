@@ -19,7 +19,9 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -49,6 +51,8 @@ public class Commessa {
 	private Azienda azienda;
 	
 	@ManyToMany
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	@Builder.Default
 	@JoinTable(name = "commessa_risorsa", joinColumns = @JoinColumn(name = "commessa_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "risorsa_id", referencedColumnName = "ID"))
 	private Set<Risorsa> risorse = new HashSet<>();

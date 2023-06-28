@@ -67,9 +67,9 @@ public class RisorsaDTO {
 		if (risorsaModel.getCv()!=null) {
 			result.setCv(AttachmentDTO.buildAttachmentDTOFromModel(risorsaModel.getCv(),includeCv));
 		}
-		if (includesCommesse) {
-			result.setCommesse(CommessaDTO.createCommessaDTOListFromModelSet(risorsaModel.getCommesse(),false,false));
-		}
+//		if (includesCommesse) {
+//			result.setCommesse(CommessaDTO.createCommessaDTOListFromModelSet(risorsaModel.getCommesse(),false,false));
+//		}
 		return result;
 	}
 

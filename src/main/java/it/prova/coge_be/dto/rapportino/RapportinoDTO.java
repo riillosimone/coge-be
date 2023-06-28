@@ -47,7 +47,7 @@ public class RapportinoDTO {
 	
 	public static RapportinoDTO buildRapportinoDTOFromModel(Rapportino rapportinoModel, boolean includeCommessa, boolean includeRisorsa) {
 		RapportinoDTO result = RapportinoDTO.builder().id(rapportinoModel.getId()).numeroGiorni(rapportinoModel.getNumeroGiorni()).build();
-		if(includeCommessa) {
+		if(rapportinoModel.getCommessa() != null) {
 			result.setCommessa(CommessaDTO.buildCommessaDTOFromModel(rapportinoModel.getCommessa(), false, false));
 		}
 		if(includeRisorsa) {

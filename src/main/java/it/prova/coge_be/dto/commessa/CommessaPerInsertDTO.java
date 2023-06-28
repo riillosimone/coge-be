@@ -31,14 +31,14 @@ public class CommessaPerInsertDTO {
 
 	@NotNull(message = "{dataIn.notnull}")
 	private LocalDate dataIn;
-	@NotNull(message = "{dataOut.notnull}")
+	
 	private LocalDate dataOut;
 
 	@NotNull(message = "{importo.notnull}")
 	@Min(0)
 	private Double importo;
 	
-	private Long azienda_id;
+	private Long azienda;
 	
 	
 

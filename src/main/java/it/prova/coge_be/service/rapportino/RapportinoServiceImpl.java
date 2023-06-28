@@ -46,4 +46,16 @@ public class RapportinoServiceImpl implements RapportinoService {
 		
 	}
 
+	@Override
+	public List<Rapportino> listAllElementsEager() {
+		return repository.getAllEagerWithRisorsa();
+	}
+
+	@Override
+	public Rapportino caricaElementoEager(Long id) {
+		return repository.getSingleEager(id);
+	}
+
+	
+
 }

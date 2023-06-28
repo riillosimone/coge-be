@@ -38,7 +38,7 @@ public class CommessaDTO {
 
 	@NotNull(message = "{dataIn.notnull}")
 	private LocalDate dataIn;
-	@NotNull(message = "{dataOut.notnull}")
+	
 	private LocalDate dataOut;
 
 	@NotNull(message = "{importo.notnull}")

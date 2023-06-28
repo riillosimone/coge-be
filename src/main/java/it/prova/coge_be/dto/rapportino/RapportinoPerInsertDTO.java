@@ -23,6 +23,8 @@ public class RapportinoPerInsertDTO {
 	@Min(0)
 	private Integer numeroGiorni;
 
-	private Long risorsa_id;
+	private Long risorsa;
+	
+	private Long commessa	;
 
 }

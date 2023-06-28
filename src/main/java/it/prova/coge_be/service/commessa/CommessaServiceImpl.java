@@ -2,6 +2,7 @@ package it.prova.coge_be.service.commessa;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +58,11 @@ public class CommessaServiceImpl implements CommessaService {
 	@Override
 	public List<ICommessaMargineDTO> commesseChiuseConMargineDecrescente() {
 		return repository.commesseChiuseConMargineDecrescente();
+	}
+
+	@Override
+	public Commessa caricaSingoloEager(Long id) {
+		return repository.getSingleEager(id);
 	}
 
 }
