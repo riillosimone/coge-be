@@ -19,15 +19,10 @@ public interface CommessaRepository extends CrudRepository<Commessa, Long> {
 			+ " where c.data_out is not null " + "  GROUP BY c.id  \r\n" + ") subquery ON c.id = subquery.id\r\n"
 			+ "ORDER BY subquery.margine DESC;", nativeQuery = true)
 	List<ICommessaMargineDTO> commesseChiuseConMargineDecrescente();
-<<<<<<< Updated upstream
-
-=======
-	
 	@Query("from Commessa c join fetch c.azienda a join fetch c.risorse r where c.id=?1")
 	Commessa getSingleEager(Long id);
 	
 	
 	
 	
->>>>>>> Stashed changes
 }
