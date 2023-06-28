@@ -18,7 +18,7 @@ public interface RisorsaRepository extends CrudRepository<Risorsa, Long>, JpaRep
 	@Query("from Risorsa r join fetch r.commesse c where r.id =?1")
 	Risorsa getSingleEagerWithCommesse(Long id);
 //	
-	@Query("from Risorsa r join fetch r.cv a where r.id = ?1")
+	@Query("from Risorsa r left join fetch r.cv a where r.id = ?1")
 	Risorsa getSingleEagerWithAttachment(Long id);
 	
 	@Query("from Risorsa r join fetch r.cv a")

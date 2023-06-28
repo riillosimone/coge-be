@@ -2,11 +2,13 @@ package it.prova.coge_be.dto.risorsa;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import it.prova.coge_be.dto.commessa.CommessaDTO;
 import it.prova.coge_be.model.Risorsa;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,6 +43,7 @@ public class InsertRisorsaDTO {
 	private Integer costoGiornaliero;
 	
 	private byte[] cv;
+	
 	
 	
 	public Risorsa buildModelFromDTO() {

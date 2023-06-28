@@ -51,7 +51,7 @@ public class RapportinoDTO {
 			result.setCommessa(CommessaDTO.buildCommessaDTOFromModel(rapportinoModel.getCommessa(), false, false));
 		}
 		if(includeRisorsa) {
-			result.setRisorsa(RisorsaDTO.buildRisorsaDTOFromModel(rapportinoModel.getRisorsa(), false, false));
+			result.setRisorsa(RisorsaDTO.buildRisorsaDTOFromModel(rapportinoModel.getRisorsa()));
 		}
 		return result;
 	}

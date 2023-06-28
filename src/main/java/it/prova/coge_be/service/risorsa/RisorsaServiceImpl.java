@@ -39,13 +39,17 @@ public class RisorsaServiceImpl implements RisorsaService {
 
 		Attachment attachmentNuovo = entityInstance.getCv();
 		Risorsa risorsaCaricata = repository.getSingleEagerWithAttachment(entityInstance.getId());
-		if (risorsaCaricata.getCv().getId() != null) {
-			attachmentNuovo.setId(risorsaCaricata.getCv().getId());
+		if (risorsaCaricata == null) {
+			System.err.println("Aoooooooooooooo");
 		}
-		attachmentNuovo.setRisorsa(risorsaCaricata);
-		attachmentRepository.save(attachmentNuovo);
-		risorsaCaricata.setCv(attachmentNuovo);
-		return repository.save(risorsaCaricata);
+		if (risorsaCaricata.getCv() != null && risorsaCaricata.getCv().getId() != null) {
+
+			attachmentNuovo.setId(risorsaCaricata.getCv().getId());
+			attachmentNuovo.setRisorsa(risorsaCaricata);
+			attachmentRepository.save(attachmentNuovo);
+		}
+
+		return repository.save(entityInstance);
 
 	}
 
@@ -63,7 +67,7 @@ public class RisorsaServiceImpl implements RisorsaService {
 	@Transactional
 	public void rimuoviById(Long idToRemove) {
 		Risorsa risorsaCaricata = this.caricaSingoloElementoEager(idToRemove);
-		if(risorsaCaricata.getCv() != null) {
+		if (risorsaCaricata.getCv() != null) {
 			attachmentRepository.deleteById(risorsaCaricata.getCv().getId());
 		}
 		repository.deleteById(idToRemove);

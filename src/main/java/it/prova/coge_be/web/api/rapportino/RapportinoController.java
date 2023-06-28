@@ -49,7 +49,11 @@ public class RapportinoController {
 		
 		@GetMapping("/{id}")
 		public RapportinoDTO visualizza (@PathVariable(required = true) Long id) {
+<<<<<<< Updated upstream
 			return RapportinoDTO.buildRapportinoDTOFromModel(rapportinoService.caricaElementoEager(id), true, true);
+=======
+			return RapportinoDTO.buildRapportinoDTOFromModel(rapportinoService.caricaSingoloElemento(id), true, true);
+>>>>>>> Stashed changes
 		}
 		
 		

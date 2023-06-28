@@ -29,12 +29,12 @@ public class AttachmentController {
 
 	@GetMapping
 	public List<AttachmentDTO> getAll() {
-		return AttachmentDTO.createAttachmentDTOListFromModelList(attachmentService.listAllElements(), true);
+		return AttachmentDTO.createAttachmentDTOListFromModelList(attachmentService.listAllElements());
 	}
 
 	@GetMapping("/{id}")
 	public AttachmentDTO getSingle(@PathVariable(required = true, value = "id") Long id) {
-		return AttachmentDTO.buildAttachmentDTOFromModel(attachmentService.caricaSingoloElemento(id), false);
+		return AttachmentDTO.buildAttachmentDTOFromModel(attachmentService.caricaSingoloElemento(id));
 	}
 
 	@PostMapping
@@ -43,7 +43,7 @@ public class AttachmentController {
 	public AttachmentDTO createNew(@RequestBody AttachmentDTO attachmentDTO) {
 		Attachment attachmentTransient = attachmentDTO.buildModelFromDTO();
 		attachmentService.inserisciNuovo(attachmentTransient);
-		return AttachmentDTO.buildAttachmentDTOFromModel(attachmentTransient, false);
+		return AttachmentDTO.buildAttachmentDTOFromModel(attachmentTransient);
 	}
 
 	@PutMapping("/edit//{id}")
@@ -53,7 +53,7 @@ public class AttachmentController {
 		attachmentDTO.setId(id);
 		attachmentService.aggiorna(attachmentDTO.buildModelFromDTO());
 		Attachment allegato = attachmentService.caricaSingoloElemento(id);
-		return AttachmentDTO.buildAttachmentDTOFromModel(allegato, false);
+		return AttachmentDTO.buildAttachmentDTOFromModel(allegato);
 	}
 
 	@DeleteMapping("/{id}")

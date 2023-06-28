@@ -36,12 +36,12 @@ public class RisorsaController {
 
 	@GetMapping
 	public List<RisorsaDTO> getAll() {
-		return RisorsaDTO.createRisorsaDTOListFromModelList(service.listAllElements(), false, false);
+		return RisorsaDTO.createRisorsaDTOListFromModelList(service.listAllElements());
 	}
 
 	@GetMapping("/{id}")
 	public RisorsaDTO getSingleEager(@PathVariable(value = "id", required = true) Long id) {
-		return RisorsaDTO.buildRisorsaDTOFromModel(service.caricaSingoloElementoEager(id), true, false);
+		return RisorsaDTO.buildRisorsaDTOFromModel(service.caricaSingoloElementoEager(id));
 	}
 	
 	
@@ -59,15 +59,15 @@ public class RisorsaController {
 		Risorsa risorsaModel = risorsaInstance.buildModelFromDTO();
 		Risorsa risorsaInserita = service.inserisciNuovo(risorsaModel);
 
-		return RisorsaDTO.buildRisorsaDTOFromModel(service.caricaSingoloElemento(risorsaInserita.getId()), false, false);
+		return RisorsaDTO.buildRisorsaDTOFromModel(service.caricaSingoloElemento(risorsaInserita.getId()));
 	}
 
 	@PutMapping("/edit/{id}")
-	public RisorsaDTO update(@Valid @RequestBody RisorsaDTO risorsaInput, @PathVariable(required = true) Long id) {
+	public RisorsaDTO update(@PathVariable(required = true) Long id, @Valid @RequestBody RisorsaDTO risorsaInput) {
 
 		risorsaInput.setId(id);
 		Risorsa risorsaAggiornata = service.aggiorna(risorsaInput.buildModelFromDTO());
-		return RisorsaDTO.buildRisorsaDTOFromModel(risorsaAggiornata, false, true);
+		return RisorsaDTO.buildRisorsaDTOFromModel(risorsaAggiornata);
 	}
 
 	@DeleteMapping("/delete/{id}")

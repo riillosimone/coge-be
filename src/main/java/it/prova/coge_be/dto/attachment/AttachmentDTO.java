@@ -37,7 +37,7 @@ public class AttachmentDTO {
 		return result;
 	}
 
-	public static AttachmentDTO buildAttachmentDTOFromModel(Attachment attachmentModel, boolean includeRisorsa) {
+	public static AttachmentDTO buildAttachmentDTOFromModel(Attachment attachmentModel) {
 		AttachmentDTO result = AttachmentDTO.builder().id(attachmentModel.getId())
 				.contentType(attachmentModel.getContentType()).descrizione(attachmentModel.getDescrizione())
 				.dataCreazione(attachmentModel.getDataCreazione()).payload(attachmentModel.getPayload())
@@ -46,9 +46,9 @@ public class AttachmentDTO {
 		return result;
 	}
 
-	public static List<AttachmentDTO> createAttachmentDTOListFromModelList(List<Attachment> modelListInput,boolean includeRisorsa) {
+	public static List<AttachmentDTO> createAttachmentDTOListFromModelList(List<Attachment> modelListInput) {
 		return modelListInput.stream().map(attachmentItem -> {
-			return AttachmentDTO.buildAttachmentDTOFromModel(attachmentItem,includeRisorsa);
+			return AttachmentDTO.buildAttachmentDTOFromModel(attachmentItem);
 		}).collect(Collectors.toList());
 	}
 }

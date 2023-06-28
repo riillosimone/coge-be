@@ -58,32 +58,35 @@ public class RisorsaDTO {
 		return result;
 	}
 
-	public static RisorsaDTO buildRisorsaDTOFromModel(Risorsa risorsaModel, boolean includeCv,
-			boolean includesCommesse) {
+	public static RisorsaDTO buildRisorsaDTOFromModel(Risorsa risorsaModel) {
 		RisorsaDTO result = RisorsaDTO.builder().id(risorsaModel.getId()).nome(risorsaModel.getNome())
 				.cognome(risorsaModel.getCognome()).dataIn(risorsaModel.getDataIn()).dataOut(risorsaModel.getDataOut())
 				.cf(risorsaModel.getCf()).email(risorsaModel.getEmail())
 				.costoGiornaliero(risorsaModel.getCostoGiornaliero()).build();
 		if (risorsaModel.getCv()!=null) {
-			result.setCv(AttachmentDTO.buildAttachmentDTOFromModel(risorsaModel.getCv(),includeCv));
+			result.setCv(AttachmentDTO.buildAttachmentDTOFromModel(risorsaModel.getCv()));
 		}
+<<<<<<< Updated upstream
 //		if (includesCommesse) {
 //			result.setCommesse(CommessaDTO.createCommessaDTOListFromModelSet(risorsaModel.getCommesse(),false,false));
 //		}
+=======
+		if (risorsaModel.getCommesse()!=null) {
+			result.setCommesse(CommessaDTO.createCommessaDTOListFromModelSet(risorsaModel.getCommesse(),false,false));
+		}
+>>>>>>> Stashed changes
 		return result;
 	}
 
-	public static List<RisorsaDTO> createRisorsaDTOListFromModelList(List<Risorsa> modelListInput, boolean includeCv,
-			boolean includesCommesse) {
+	public static List<RisorsaDTO> createRisorsaDTOListFromModelList(List<Risorsa> modelListInput) {
 		return modelListInput.stream().map(risorsaItem -> {
-			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem,includeCv,includesCommesse);
+			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem);
 		}).collect(Collectors.toList());
 	}
 
-	public static List<RisorsaDTO> createRisorsaDTOListFromModelSet(Set<Risorsa> modelListInput, boolean includeCv,
-			boolean includesCommesse) {
+	public static List<RisorsaDTO> createRisorsaDTOListFromModelSet(Set<Risorsa> modelListInput) {
 		return modelListInput.stream().map(risorsaItem -> {
-			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem,includeCv,includesCommesse);
+			return RisorsaDTO.buildRisorsaDTOFromModel(risorsaItem);
 		}).collect(Collectors.toList());
 	}
 

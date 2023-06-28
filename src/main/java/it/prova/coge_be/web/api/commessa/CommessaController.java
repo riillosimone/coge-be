@@ -55,9 +55,15 @@ public class CommessaController {
 
 >>>>>>> Stashed changes
 	@GetMapping
+<<<<<<< Updated upstream
 	public List<CommessaDTO> visualizzaCommesse() {
 		return CommessaDTO.createCommessaDTOListFromModelList(commessaService.listAll(), true, false);
 
+=======
+	public List<CommessaDTO> visualizzaCommesse(){
+		return CommessaDTO.createCommessaDTOListFromModelList(commessaService.listAll(), false, false);
+		
+>>>>>>> Stashed changes
 	}
 
 	@GetMapping("/{id}")
@@ -91,6 +97,7 @@ public class CommessaController {
 //		
 //	}
 	
+<<<<<<< Updated upstream
 =======
 
 	@PostMapping
@@ -113,6 +120,9 @@ public class CommessaController {
 
 	}
 
+>>>>>>> Stashed changes
+=======
+	
 >>>>>>> Stashed changes
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
